@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drug Synergy Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1e4bae;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #1e4bae;
+        }
+
+        select, input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #1e4bae;
+            border-radius: 5px;
+            background-color: #ffffff;
+            color: #1e4bae;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        a
+        { color: #ffffff;}
+
+        select:focus, input[type="submit"]:hover {
+            background-color: #344363;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .table-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .theorycontainer {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(239, 195, 195, 0.1);
+        }
+
+        .table-container h2 {
+            color: #1e4bae;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #1e4bae;
+            color: #1e4bae;
+        }
+
+        th {
+            background-color: #f0f7fa;
+            color: #000000;
+            border: #d99c9c;
+
+        }
+
+        tr:nth-child(even) {
+            background-color: #f0f7fa;
+        }
+
+        .navbar {
+    background-color: #096ac0;
+    padding: 15px;
+    color: white;
+    display: flex; /* Use flexbox */
+    justify-content: space-between; /* Space items evenly along the main axis */
+    align-items: center; /* Center items vertically */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+        tr:hover {
+            background-color: #d4e9f7;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="templates\home.html">Home</a>
+        <a href="index.html">Prediction</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="dataset.html">Dataset</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+    <h1>Drug Synergy Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="drug_a_name">Enter Drug A:</label>
+        <select id="drug_a_name" name="drug_a_name" required>
+            <option value="" disabled selected>Select Drug A</option>
+            <option value="ABT-888">ABT-888</option>
+            <option value="AZD1775">AZD1775</option>
+            <option value="BEZ-235">BEZ-235</option>
+            <option value="DINACICLIB">DINACICLIB</option>
+            <option value="GELDANAMYCIN">GELDANAMYCIN</option>
+            <option value="L778123">L778123</option>
+            <option value="MK-2206">MK-2206</option>
+            <option value="MK-4541">MK-4541</option>
+            <option value="MK-4827">MK-4827</option>
+            <option value="MK-5108">MK-5108</option>
+            <option value="MK-8669">MK-8669</option>
+            <option value="MK-8776">MK-8776</option>
+            <option value="MRK-003">MRK-003</option>
+            <option value="PD325901">PD325901</option>
+            <option value="BORTEZOMIB">BORTEZOMIB</option>
+            <option value="DASATINIB">DASATINIB</option>
+            <option value="ERLOTINIB">ERLOTINIB</option>
+            <option value="LAPATINIB">LAPATINIB</option>
+            <option value="SORAFENIB">SORAFENIB</option>
+            <option value="SUNITINIB">SUNITINIB</option>
+            <option value="TEMOZOLOMIDE">TEMOZOLOMIDE</option>
+            <option value="ZOLINZA">ZOLINZA</option>
+            <option value="5-FU">5-FU</option>
+            <option value="CARBOPLATIN">CARBOPLATIN</option>
+            <option value="CYCLOPHOSPHAMIDE">CYCLOPHOSPHAMIDE</option>
+            <option value="DEXAMETHASONE">DEXAMETHASONE</option>
+            <option value="DOXORUBICIN">DOXORUBICIN</option>
+            <option value="ETOPOSIDE">ETOPOSIDE</option>
+            <option value="GEMCITABINE">GEMCITABINE</option>
+            <option value="METFORMIN">METFORMIN</option>
+            <option value="METHOTREXATE">METHOTREXATE</option>
+            <option value="MITOMYCIN">MITOMYCIN</option>
+            <option value="OXALIPLATIN">OXALIPLATIN</option>
+            <option value="PACLITAXEL">PACLITAXEL</option>
+            <option value="SN-38">SN-38</option>
+            <option value="TOPOTECAN">TOPOTECAN</option>
+            <option value="VINBLASTINE">VINBLASTINE</option>
+            <option value="VINORELBINE">VINORELBINE</option>
+        </select><br><br>
+        
+        <label for="drug_b_name">Enter Drug B:</label>
+        <select id="drug_b_name" name="drug_b_name" required>
+            <option value="" disabled selected>Select Drug B</option>
+            <option value="ABT-888">ABT-888</option>
+            <option value="AZD1775">AZD1775</option>
+            <option value="BEZ-235">BEZ-235</option>
+            <option value="DINACICLIB">DINACICLIB</option>
+            <option value="GELDANAMYCIN">GELDANAMYCIN</option>
+            <option value="L778123">L778123</option>
+            <option value="MK-2206">MK-2206</option>
+            <option value="MK-4541">MK-4541</option>
+            <option value="MK-4827">MK-4827</option>
+            <option value="MK-5108">MK-5108</option>
+            <option value="MK-8669">MK-8669</option>
+            <option value="MK-8776">MK-8776</option>
+            <option value="MRK-003">MRK-003</option>
+            <option value="PD325901">PD325901</option>
+            <option value="BORTEZOMIB">BORTEZOMIB</option>
+            <option value="DASATINIB">DASATINIB</option>
+            <option value="ERLOTINIB">ERLOTINIB</option>
+            <option value="LAPATINIB">LAPATINIB</option>
+            <option value="SORAFENIB">SORAFENIB</option>
+            <option value="SUNITINIB">SUNITINIB</option>
+            <option value="TEMOZOLOMIDE">TEMOZOLOMIDE</option>
+            <option value="ZOLINZA">ZOLINZA</option>
+            <option value="5-FU">5-FU</option>
+            <option value="CARBOPLATIN">CARBOPLATIN</option>
+            <option value="CYCLOPHOSPHAMIDE">CYCLOPHOSPHAMIDE</option>
+            <option value="DEXAMETHASONE">DEXAMETHASONE</option>
+            <option value="DOXORUBICIN">DOXORUBICIN</option>
+            <option value="ETOPOSIDE">ETOPOSIDE</option>
+            <option value="GEMCITABINE">GEMCITABINE</option>
+            <option value="METFORMIN">METFORMIN</option>
+            <option value="METHOTREXATE">METHOTREXATE</option>
+            <option value="MITOMYCIN">MITOMYCIN</option>
+            <option value="OXALIPLATIN">OXALIPLATIN</option>
+            <option value="PACLITAXEL">PACLITAXEL</option>
+            <option value="SN-38">SN-38</option>
+            <option value="TOPOTECAN">TOPOTECAN</option>
+            <option value="VINBLASTINE">VINBLASTINE</option>
+            <option value="VINORELBINE">VINORELBINE</option>
+        </select><br><br>
+        
+        <label for="cell_line">Enter Cell Line:</label>
+        <select id="cell_line" name="cell_line" required>
+            <option value="" disabled selected>Select Cell Line</option>
+            <option value="A2058">A2058 (SKIN)</option>
+            <option value="A2780">A2780 (OVARY)</option>
+            <option value="A375">A375 (SKIN)</option>
+            <option value="A427">A427 (LUNG)</option>
+            <option value="CAOV-3">CAOV-3 (OVARY)</option>
+            <option value="COLO-320-DM">COLO-320-DM (LARGE INTESTINE)</option>
+            <option value="DLD-1">DLD-1 (LARGE INTESTINE)</option>
+            <option value="EFM-192B">EFM-192B (BREAST)</option>
+            <option value="ES-2">ES-2 (OVARY)</option>
+            <option value="HCT-116">HCT-116 (LARGE INTESTINE)</option>
+            <option value="HT-144">HT-144 (SKIN)</option>
+            <option value="HT-29">HT-29 (LARGE INTESTINE)</option>
+            <option value="KPL-1">KPL-1 (BREAST)</option>
+            <option value="LNCAP">LNCAP (PROSTATE)</option>
+            <option value="LOVO">LOVO (LARGE INTESTINE)</option>
+            <option value="MDA-MB-436">MDA-MB-436 (BREAST)</option>
+            <option value="MSTO-211H">MSTO-211H (PLEURA)</option>
+            <option value="NCI-H1650">NCI-H1650 (LUNG)</option>
+            <option value="NCI-H2122">NCI-H2122 (LUNG)</option>
+            <option value="NCI-H23">NCI-H23 (LUNG)</option>
+            <option value="NCI-H460">NCI-H460 (LUNG)</option>
+            <option value="NCI-H520">NCI-H520 (LUNG)</option>
+            <option value="OCUB-M">OCUB-M (BREAST)</option>
+            <option value="OV-90">OV-90 (OVARY)</option>
+            <option value="OVCAR-3">OVCAR-3 (OVARY)</option>
+            <option value="PA-1">PA-1 (OVARY)</option>
+            <option value="RKO">RKO (LARGE INTESTINE)</option>
+            <option value="RPMI-7951">RPMI-7951 (SKIN)</option>
+            <option value="SK-MEL-30">SK-MEL-30 (SKIN)</option>
+            <option value="SK-MES-1">SK-MES-1 (LUNG)</option>
+            <option value="SK-OV-3">SK-OV-3 (OVARY)</option>
+            <option value="SW620">SW620 (LARGE INTESTINE)</option>
+            <option value="SW837">SW837 (LARGE INTESTINE)</option>
+            <option value="T47D">T47D (BREAST)</option>
+            <option value="UACC-62">UACC-62 (SKIN)</option>
+            <option value="UWB1_289">UWB1_289 (OVARY)</option>
+            <option value="UWB1_289_BRCA1">UWB1_289_BRCA1 (OVARY)</option>
+            <option value="VCAP">VCAP (PROSTATE)</option>
+            <option value="ZR-75-1">ZR-75-1 (BREAST)</option>
+        </select><br><br>
+        
+        <input type="submit" value="Submit">
+
+    </form>
+    <div class="theorycontainer">
+    <h1>Synergy Value in Drug Discovery</h1>
+    <p>In drug discovery, synergy refers to the combined effect of two or more drugs being greater than the sum of their individual effects. The synergy value quantifies this interaction.</p>
+  
+    <h2>What it represents:</h2>
+    <p>The synergy value represents the <strong>excess benefit</strong> obtained when two drugs are combined compared to their individual contributions. It's a measure of how well the drugs work together to achieve a desired outcome, often related to therapeutic efficacy.</p>
+  
+    <h2>Positive synergy value:</h2>
+    <p>A positive synergy value indicates <strong>synergy</strong>. This means that the combined effect of the drugs is **greater** than the expected additive effect. In simpler terms, the drugs work together more effectively than when used alone, potentially leading to:</p>
+    <ul>
+      <li><strong>Enhanced therapeutic effect</strong>: Drugs may achieve a stronger response against a disease or condition.</li>
+      <li><strong>Lower dosage requirements</strong>: Reduced individual drug doses might be needed to achieve the same outcome, potentially leading to fewer side effects.</li>
+      <li><strong>Broader spectrum of action</strong>: The combination may target different aspects of a disease process, leading to a more comprehensive effect.</li>
+    </ul>
+  
+    <h2>Negative synergy value:</h2>
+    <p>A negative synergy value indicates <strong>antagonism</strong>. This means that the combined effect of the drugs is **less** than the expected additive effect. In other words, the drugs might be working against each other, potentially leading to:</p>
+    <ul>
+      <li><strong>Reduced efficacy</strong>: The drugs may not be as effective together as they are individually.</li>
+      <li><strong>Increased toxicity</strong>: Combining drugs might lead to a higher risk of side effects.</li>
+    </ul>
+  
+    <h2>High vs. Low Values:</h2>
+    <ul>
+      <li><strong>High positive values</strong>: Indicate a strong synergistic interaction, suggesting significant potential for improved therapeutic outcomes.</li>
+      <li><strong>Low positive values</strong>: Suggest some level of synergism, but the combined effect might not be as pronounced.</li>
+      <li><strong>Negative values</strong>: Indicate antagonism, which is undesirable in drug combinations.</li>
+    </ul>
+  
+    <h2>Synergy Score in Drug Synergy:</h2>
+    <p>The specific method for calculating the synergy value can vary depending on the chosen model. Here are some common approaches:</p>
+    <ul>
+      <li><strong>Bliss independence model</strong>: This assumes no interaction between the drugs and compares the observed effect to the expected additive effect. Deviations from the expected value indicate synergy or antagonism.</li>
+      <li><strong>Loewe additivity model</strong>: Similar to Bliss independence, but it accounts for the potency of individual drugs.</li>
+      <li><strong>Excess over Bliss (EOB) or Excess over Loewe (EOL)</strong>: These measures quantify the deviation from the expected additive effect using either the Bliss or Loewe model.</li>
+    </ul>
+  
+    <h2>Interpretation of Synergy Score in Drug Discovery:</h2>
+    <p>The interpretation of the synergy score depends on the chosen model and its scale. It's crucial to consider the context of your study and establish a threshold for defining significant synergy or antagonism. Additionally, in silico (computer-based) predictions of synergy require validation through biological experiments.</p>
+    <p><b>Overall, understanding synergy values plays a crucial role in drug discovery and development by helping researchers identify promising drug combinations for further investigation.</b></p>
+  </div>
+</body>
+</html>
+  
